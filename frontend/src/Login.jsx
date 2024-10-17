@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./Login.css";
+import axios from "axios"; // Importar Axios
 
+// Importa las imágenes
 import TallerV from "./assets/images/Taller V.png";
 import imagen4 from "./assets/images/imagen 4.jpg";
 import imagen6 from "./assets/images/imagen 6.jpg";
@@ -8,11 +10,24 @@ import imagen6 from "./assets/images/imagen 6.jpg";
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState(""); // Para manejar errores
 
-    const handleLogin = (event) => {
+    // Manejo del envío del formulario
+    const handleLogin = async (event) => {
         event.preventDefault();
-        console.log("Username:", username);
-        console.log("Password:", password);
+        try {
+            const response = await axios.post("http://localhost:3000/login", {
+                username,
+                password,
+            });
+
+            console.log("Login exitoso:", response.data);
+            // Aquí puedes manejar lo que ocurre después de un login exitoso,
+            // como redirigir al usuario a otra página o guardar el token.
+        } catch (error) {
+            setErrorMessage("Error al iniciar sesión. Por favor, verifica tus credenciales.");
+            console.error("Error en el login:", error);
+        }
     };
 
     return (
@@ -41,6 +56,7 @@ const Login = () => {
                         <button type="submit" className="login-btn">
                             Login
                         </button>
+                        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
                         <a href="#" className="forgot-password">
                             Forgot password?
                         </a>
