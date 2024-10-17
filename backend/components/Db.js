@@ -1,23 +1,16 @@
+const config = require("../config/configDB.json");
+
 const Db = class {
-  constructor() {
+  constructor(querys) {
+    this.querys = querys;
     const { Pool } = require("pg");
-    this.pool = new Pool({
-      database: "clinica",
-      user: "postgres",
-      password: "12bote34",
-      port: 5432,
-      ssl: false,
-      max: 20, // set pool max size to 20
-      idleTimeoutMillis: 1000, // close idle clients after 1 second
-      connectionTimeoutMillis: 1000, // return an error after 1 second if connection could not be established
-      maxUses: 7500, // close (and replace) a connection after it has been used 7500 times (see below for discussion)
-    });
+    this.pool = new Pool(config);
   }
 
-  async exe(sentencia, params) {
+  async exe(querys, params) {
     try {
       let client = await this.pool.connect();
-      let res = await client.query(sentencia, params);
+      let res = await client.query(querys, params);
       client.release();
       return res;
     } catch (e) {
