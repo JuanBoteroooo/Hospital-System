@@ -1,0 +1,127 @@
+/* Estructura de la página, ocupando toda la pantalla */
+.login-page {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw; /* Asegura que ocupe todo el ancho */
+}
+
+/* Sección izquierda para la cuadrícula, ocupando todo el espacio morado */
+.left-section {
+    width: 50%; /* Ocupa el 50% de la pantalla */
+    background-color: #3ad4dc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Espacio alrededor de la cuadrícula */
+    box-sizing: border-box;
+}
+
+/* Cuadrícula ajustada a 1 fila y 3 columnas */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    gap: 20px; /* Mayor espacio entre las imágenes */
+    width: 80%; /* Ocupa el 80% del ancho disponible */
+    height: auto; /* Ajusta la altura automáticamente */
+    justify-content: center; /* Centra las imágenes */
+    align-items: center; /* Centra las imágenes verticalmente */
+    box-sizing: border-box;
+}
+
+/* Imágenes que ocupan toda la celda de la cuadrícula */
+.grid-image {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    height: 300px; /* Ajusta la altura de las imágenes para que sean grandes */
+    object-fit: cover; /* Asegura que las imágenes mantengan su proporción */
+    border-radius: 10px;
+    transition: transform 0.3s ease; /* Transición suave */
+}
+
+/* Animación al pasar el mouse */
+.grid-image:hover {
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el mouse */
+}
+
+/* Sección derecha para el formulario */
+.right-section {
+    width: 50%; /* Ocupa el otro 50% de la pantalla */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+/* Contenedor del formulario */
+.login-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    width: 100%; /* Asegura que el contenedor se adapte bien */
+    max-width: 350px;
+    text-align: center;
+}
+
+/* Estilo del título */
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Estilos para los inputs */
+.input-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 16px;
+    display: block;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Botón de login */
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #7a25ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.login-btn:hover {
+    background-color: #5b00a3;
+}
+
+/* Enlaces de Forgot password y Create Account */
+.forgot-password,
+.create-account {
+    display: inline-block;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #5b00a3;
+    text-decoration: none;
+}
+
+.forgot-password:hover,
+.create-account:hover {
+    text-decoration: underline;
+}
+
+/* Añadir separación entre los dos enlaces */
+.create-account {
+    margin-left: 15px;
+}
