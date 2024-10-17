@@ -5,15 +5,8 @@ const Security = class {
   }
 
   loadPermission() {
-    db.exe(
-      `
-            select sp.permission_id, m.method_na, o.object_de, pr.profile_id from security.permission sp
-            inner join security.method m on m.method_id = sp.method_id
-            inner join security.object o on o.object_id = m.object_id
-            inner join security.profile pr on pr.profile_id = sp.profile_id
-        `,
-      null
-    ).then((r) => {
+    db.exe('',[])
+    .then((r) => {
       r.rows.forEach((element) => {
         let key =
           element.profile_id +

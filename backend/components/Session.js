@@ -18,7 +18,7 @@ const Session = class {
     );
   }
 
-  autenticar(req) {}
+  // autenticar(req) {}
 
   sessionExist(req) {
     if (req.session) {
@@ -28,19 +28,30 @@ const Session = class {
     } else return false;
   }
 
-  createSession(req, res) {
-    db("security","getUser",[req.body.username, req.body.password])
-    .then((r) => {
-      if (r.rows.length > 0) {
-        req.session.userId = r.rows[0].user_id;
-        req.session.userName = r.rows[0].user_na;
-        req.session.userProfile = r.rows[0].profile_id;
-        res.send("sesion creada..!");
-      } else {
-        res.send("Datos invalidos, no se puede hacer login..!");
-      }
-    });
-  }
+  async createSession({req, user}){
+    try{       
+        const {session} = req;
+        console.log(user)
+        for(let key in user){
+            session[key] = user[key];
+            console.log(`creare sesion con ${session[key]}`);
+        }
+        return new Promise((resolve, reject) => {
+            session.save(err => {
+                if(err) {
+                    console.error('Error al guardar la sesión:', err);
+                    reject(err);
+                } else {
+                    console.log('Sesión guardada con éxito');
+                    resolve();
+                }
+            });
+        });
+        }catch(error){
+            console.log(error)
+            return {error}
+        }
+}
 };
 
 module.exports = Session;
