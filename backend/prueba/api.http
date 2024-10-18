@@ -8,25 +8,19 @@ Content-Type: application/json
 }
 
 ### Register Request
-
 POST http://localhost:3000/register
 Content-Type: application/json
 
 {
-    "username": "adriana",
-    "password": "abril0304",
-    "email": "adrianakmontiele@gmail.com"
+    "username": "nuevoUsuario",
+    "password": "contrasenaSegura",
+    "name": "Juan",
+    "lastName": "Pérez",
+    "phone": "1234567890",
+    "email": "juan.perez@example.com",
+    "address": "Calle Falsa 123"
 }
 
 ### Logout Request
 
 POST http://localhost:3000/logout
-
-### hasSession Request
-
-POST http://localhost:3000/hasSession
-Content-Type: application/json
-    
-    {
-        "token": "eyJhbG"
-    }

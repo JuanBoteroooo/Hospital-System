@@ -2,6 +2,7 @@
     "selectAllUsers": "select username, password, email from users",
     "getUser": "select username, password from users where username = $1 and password = $2",
     "getUsers": "select user_id, user_na, profile_id from public.user where user_na = $1 and user_cl = $2",
-    "registerUser": "insert into users (username, password, email) values ($1, $2, $3) RETURNING *",
-    "checkUserExists": "SELECT 1 FROM users WHERE username = $1"
+    "registerUser": "insert into users (username, password, person_id) values ($1, $2, $3) RETURNING *",
+    "checkUserExists": "SELECT 1 FROM users WHERE username = $1",
+    "registerData": "INSERT INTO person (person_na, person_lna, person_pho, person_eml, person_dir) VALUES ($1, $2, $3, $4, $5) RETURNING *"
 }
