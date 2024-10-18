@@ -2,6 +2,7 @@
 var express = require('express')
 var cors = require('cors')
 var app = express();
+const port = 3000;
 
 //********************** IMPORTACION DE LOS QUERYS ***********************
 const cors_config = require('../backend/config/cors.json');
@@ -15,7 +16,6 @@ app.use("/static", express.static("public"));
 app.use(express.json());
 // PARA EL PARSER CON application/xwww-
 app.use(express.urlencoded({ extended: false })); //body formulario
-app.get("/login", inicio);
 //***********************************************************************
 
 //************************** inicio de sub sistemas ****************************
@@ -25,31 +25,22 @@ global.db = new (require("../backend/components/Db.js"))(querys);
 global.log = new (require('../backend/components/Log.js'))()
 //******************************************************************************
 
-// FUNCION PARA ENVIO DEL HTML
-function inicio (req, res){
-  res.sendFile(__dirname + "/Sesion.html");
-}
-
 //******************************** ENDPOINT ************************************
 // LOGIN
 app.post('/login', async function (req, res) {
   const { username, password } = req.body;
   
-  // Verificar que los campos necesarios estén presentes
   if (!username || !password) {
       return res.status(400).send(`{"msg": "datos invalidos..!"}`);
   }
 
   try {
-      // Verificar si ya existe una sesión
       if (sess.sessionExist(req)) {
           return res.status(400).send(`{"msg": "ya tiene sesión..!"}`);
       }
 
-      // Verificar credenciales del usuario
       const result = await db.exe('getUser', [username, password]);
       if (result.rows.length > 0) {
-          // Crear sesión si las credenciales son correctas
           req.session.userId = result.rows[0].user_id;
           req.session.username = result.rows[0].username;
           return res.send(`{"msg": "sesión creada..!"}`);
@@ -70,18 +61,15 @@ app.post('/register', async function (req, res) {
   }
 
   try {
-      // Verifica si el usuario ya existe en la base de datos
       const existsResult = await db.exe('checkUserExists', [username]);
       if (existsResult.rows.length > 0) {
-          return res.status(409).send(`{"msg": "usuario ya existente..!"}`);  // 409 Conflict puede ser un código adecuado aquí
+          return res.status(409).send(`{"msg": "usuario ya existente..!"}`);
       }
 
-      // Registra los datos personales si el usuario no existe
       const personResult = await db.exe('registerData', [name, lastName, phone, email, address]);
       if (personResult.rows.length > 0) {
-          const personId = personResult.rows[0].person_id; // Asegúrate de que este campo se llama 'person_id'
+          const personId = personResult.rows[0].person_id; 
 
-          // Luego, registra el usuario con el person_id obtenido
           const userResult = await db.exe('registerUser', [username, password, personId]);
           if (userResult.rows.length > 0) {
               return res.send(`{"msg": "usuario registrado con éxito..!"}`);
@@ -136,5 +124,6 @@ app.post('/toProcess', function (req, res) {
 //********************************************************************************
 
 // SERVIDOR
-app.listen(3000);
-console.log("Servidor activo en http://localhost:3000");
+app.listen(port, () => {
+  console.log(`Server running on port http://localhost:${port}`);
+});
