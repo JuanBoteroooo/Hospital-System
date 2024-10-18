@@ -1,15 +1,25 @@
 import React, { useState } from "react";
 import "./Login.css";
 import imagen4 from "../assets/images/imagen4.jpg"; // Importa la imagen directamente
+import axios from "axios"; // Importa axios
 
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleLogin = (event) => {
+    const handleLogin = async (event) => {
         event.preventDefault();
-        console.log("Username:", username);
-        console.log("Password:", password);
+        try {
+            // Enviar los datos de login al servidor
+            const response = await axios.post("http://localhost:3000/login", {
+                username,
+                password,
+            });
+            console.log("Response:", response.data);
+            // Aquí puedes redirigir o manejar el login exitoso
+        } catch (error) {
+            console.error("Error during login:", error);
+        }
     };
 
     return (
@@ -19,7 +29,7 @@ const Login = () => {
                 <img src={imagen4} alt="Login visual" className="single-image" />
             </div>
 
-            {/* Sección derecha para el formulario */}
+            {/* Sección derecha con el formulario */}
             <div className="right-section">
                 <div className="login-container">
                     <h1>Hello! Welcome to CCARDIOZ</h1>
@@ -34,13 +44,10 @@ const Login = () => {
                         <button type="submit" className="login-btn">
                             Log in
                         </button>
-                        <a href="#" className="forgot-password">
-                            Forgot password?
-                        </a>
-                        <a href="/register" className="create-account">
-                            Create Account
-                        </a>
                     </form>
+                    <a href="/register" className="forgot-password">
+                        Create Account
+                    </a>
                 </div>
             </div>
         </div>
