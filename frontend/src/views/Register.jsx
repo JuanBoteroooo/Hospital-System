@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Importa Link para la navegación
+import { Link } from "react-router-dom";
 import "./Register.css";
-import imagen4 from "../assets/images/imagen4.jpg"; // Asegúrate de que la ruta sea correcta
+import imagen4 from "../assets/images/imagen4.jpg"; // Importa la imagen directamente
+import axios from "axios"; // Importa axios
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -18,9 +19,16 @@ const Register = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form Data Submitted: ", formData);
+        try {
+            // Enviar los datos de registro al servidor
+            const response = await axios.post("http://localhost:3000/register", formData);
+            console.log("Response:", response.data);
+            // Aquí puedes redirigir o manejar el registro exitoso
+        } catch (error) {
+            console.error("Error during registration:", error);
+        }
     };
 
     return (

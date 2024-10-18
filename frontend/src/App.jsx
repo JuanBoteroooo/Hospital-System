@@ -8,11 +8,17 @@ function App() {
     return (
         <Router>
             <Routes>
-                {/* La ruta "/" ahora redirige al Login */}
-                <Route path="/" element={<Login />} /> {/* Login como página principal */}
+                {/* Ruta para login */}
                 <Route path="/login" element={<Login />} />
+
+                {/* Ruta para registro */}
                 <Route path="/register" element={<Register />} />
-                <Route path="/home" element={<Home />} /> {/* Ruta para Home */}
+
+                {/* Ruta para home */}
+                <Route path="/home" element={<Home />} />
+
+                {/* Redirigir la ruta raíz al login */}
+                <Route path="/" element={<Login />} />
             </Routes>
         </Router>
     );
