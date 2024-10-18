@@ -15,10 +15,7 @@ function App() {
                 <Route path="/register" element={<Register />} />
 
                 {/* Ruta para home */}
-                <Route path="/home" element={<Home />} />
-
-                {/* Redirigir la ruta raíz al login */}
-                <Route path="/" element={<Login />} />
+                <Route path="/" element={<Home />} />
             </Routes>
         </Router>
     );

@@ -6,13 +6,13 @@ import axios from "axios"; // Importa axios
 
 const Register = () => {
     const [formData, setFormData] = useState({
-        firstName: "",
+        username: "",
+        password: "",
+        name: "",
         lastName: "",
         phone: "",
         email: "",
         address: "",
-        username: "",
-        password: "",
     });
 
     const handleChange = (e) => {
@@ -45,8 +45,16 @@ const Register = () => {
                     <div className="input-scroll">
                         <form onSubmit={handleSubmit}>
                             <div className="input-group">
+                                <label>Username</label>
+                                <input type="text" name="username" onChange={handleChange} />
+                            </div>
+                            <div className="input-group">
+                                <label>Password</label>
+                                <input type="password" name="password" onChange={handleChange} />
+                            </div>
+                            <div className="input-group">
                                 <label>First Name</label>
-                                <input type="text" name="firstName" onChange={handleChange} />
+                                <input type="text" name="name" onChange={handleChange} />
                             </div>
                             <div className="input-group">
                                 <label>Last Name</label>
@@ -64,21 +72,12 @@ const Register = () => {
                                 <label>Address</label>
                                 <input type="text" name="address" onChange={handleChange} />
                             </div>
-                            <div className="input-group">
-                                <label>Username</label>
-                                <input type="text" name="username" onChange={handleChange} />
-                            </div>
-                            <div className="input-group">
-                                <label>Password</label>
-                                <input type="password" name="password" onChange={handleChange} />
-                            </div>
+                            {/* Botón de registro */}
+                            <button type="submit" className="submit-btn">
+                                Register
+                            </button>
                         </form>
                     </div>
-
-                    {/* Botón de registro */}
-                    <button type="submit" className="submit-btn">
-                        Register
-                    </button>
 
                     {/* Enlace para volver a la página de login */}
                     <Link to="/login" className="back-to-login">

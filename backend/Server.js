@@ -43,7 +43,7 @@ app.post('/login', async function (req, res) {
       if (result.rows.length > 0) {
           req.session.userId = result.rows[0].user_id;
           req.session.username = result.rows[0].username;
-          return res.send(`{"msg": "sesión creada..!"}`);
+          return res.status(200).send(`{"msg": "sesión creada..!"}`);
       } else {
           return res.status(401).send(`{"msg": "usuario no encontrado o contraseña incorrecta..!"}`);
       }
@@ -57,12 +57,14 @@ app.post('/login', async function (req, res) {
 app.post('/register', async function (req, res) {
   const { username, password, name, lastName, phone, email, address } = req.body;
   if (!username || !password || !name || !lastName || !phone || !email || !address) {
-      return res.status(400).send(`{"msg": "datos invalidos..!"}`);
+    console.log("datos invalidos..!");
+    return res.status(400).send(`{"msg": "datos invalidos..!"}`);
   }
 
   try {
       const existsResult = await db.exe('checkUserExists', [username]);
       if (existsResult.rows.length > 0) {
+          console.log("usuario ya existente..!");
           return res.status(409).send(`{"msg": "usuario ya existente..!"}`);
       }
 
@@ -72,11 +74,14 @@ app.post('/register', async function (req, res) {
 
           const userResult = await db.exe('registerUser', [username, password, personId]);
           if (userResult.rows.length > 0) {
+              console.log("usuario registrado con éxito..!");
               return res.send(`{"msg": "usuario registrado con éxito..!"}`);
           } else {
+              console.log("no se pudo registrar el usuario..!");
               return res.status(400).send(`{"msg": "no se pudo registrar el usuario..!"}`);
           }
       } else {
+          console.log("no se pudo registrar los datos personales..!");
           return res.status(400).send(`{"msg": "no se pudo registrar los datos personales..!"}`);
       }
   } catch (error) {
