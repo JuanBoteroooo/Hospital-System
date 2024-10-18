@@ -1,0 +1,35 @@
+/* Estilo básico para la navbar */
+.navbar {
+    background-color: #3ad4dc;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nav-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-item {
+    margin: 0 15px;
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.nav-item a:hover {
+    color: #7a25ff;
+}
+
+/* Contenido principal del Home */
+.home-container {
+    text-align: center;
+    margin-top: 50px;
+}

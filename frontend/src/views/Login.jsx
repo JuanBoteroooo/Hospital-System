@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom"; // Importar useNavigate para la 
 import axios from "axios";
 
 // Importa las imágenes
-import TallerV from "./assets/images/Taller V.png";
-import imagen4 from "./assets/images/imagen 4.jpg";
-import imagen6 from "./assets/images/imagen 6.jpg";
+import TallerV from "../assets/images/TallerV.png";
+import imagen4 from "../assets/images/imagen4.jpg";
+import imagen6 from "../assets/images/imagen6.jpg";
 
 const Login = () => {
     const [username, setUsername] = useState("");
