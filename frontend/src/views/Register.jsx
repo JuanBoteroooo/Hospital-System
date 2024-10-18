@@ -1,86 +1,81 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"; // Importa Link para la navegación
 import "./Register.css";
-
-// Importa las imágenes
-import TallerV from "../assets/images/TallerV.png";
-import imagen4 from "../assets/images/imagen4.jpg";
-import imagen6 from "../assets/images/imagen6.jpg";
-import axios from "axios"; // Importar Axios
+import imagen4 from "../assets/images/imagen4.jpg"; // Asegúrate de que la ruta sea correcta
 
 const Register = () => {
-    const [firstname, setFirstname] = useState("");
-    const [lastname, setLastname] = useState("");
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
+    const [formData, setFormData] = useState({
+        firstName: "",
+        lastName: "",
+        phone: "",
+        email: "",
+        address: "",
+        username: "",
+        password: "",
+    });
 
-    // Manejo del envío del formulario
-    const handleRegister = async (event) => {
-        event.preventDefault();
-        try {
-            const response = await axios.post("http://localhost:3000/register", {
-                firstname,
-                lastname,
-                username,
-                email,
-                password,
-            });
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
-            console.log("Registro exitoso:", response.data);
-            // Aquí puedes manejar lo que ocurre después de un registro exitoso,
-            // como redirigir al usuario o mostrar un mensaje de éxito.
-        } catch (error) {
-            setErrorMessage("Error en el registro. Por favor, intenta de nuevo.");
-            console.error("Error en el registro:", error);
-        }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("Form Data Submitted: ", formData);
     };
 
     return (
-        <div className="login-page">
-            {/* Sección izquierda con una cuadrícula de imágenes */}
+        <div className="page-container">
+            {/* Sección izquierda con decoraciones e imagen */}
             <div className="left-section">
-                <div className="image-grid">
-                    <img src={imagen4} alt="image1" className="grid-image" />
-                    //
-                    <img src={TallerV} alt="image3" className="grid-image" />
-                    <img src={imagen6} alt="image2" className="grid-image" />
-                </div>
+                <img src={imagen4} alt="Decorative" className="single-image" />
             </div>
 
             {/* Sección derecha para el formulario */}
             <div className="right-section">
-                <div className="login-container">
-                    <h1>Create an Account</h1>
-                    <form onSubmit={handleRegister}>
-                        <div className="input-group">
-                            <label htmlFor="firstname">First Name</label>
-                            <input type="text" id="firstname" value={firstname} onChange={(e) => setFirstname(e.target.value)} placeholder="First Name" required />
-                        </div>
-                        <div className="input-group">
-                            <label htmlFor="lastname">Last Name</label>
-                            <input type="text" id="lastname" value={lastname} onChange={(e) => setLastname(e.target.value)} placeholder="Last Name" required />
-                        </div>
-                        <div className="input-group">
-                            <label htmlFor="username">Username</label>
-                            <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" required />
-                        </div>
-                        <div className="input-group">
-                            <label htmlFor="email">Email</label>
-                            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
-                        </div>
-                        <div className="input-group">
-                            <label htmlFor="password">Password</label>
-                            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
-                        </div>
-                        <button type="submit" className="login-btn">
-                            Register
-                        </button>
-                        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-                        <a href="/login" className="create-account">
-                            Back to Login
-                        </a>
-                    </form>
+                <div className="form-container">
+                    <h1>Register</h1>
+                    <div className="input-scroll">
+                        <form onSubmit={handleSubmit}>
+                            <div className="input-group">
+                                <label>First Name</label>
+                                <input type="text" name="firstName" onChange={handleChange} />
+                            </div>
+                            <div className="input-group">
+                                <label>Last Name</label>
+                                <input type="text" name="lastName" onChange={handleChange} />
+                            </div>
+                            <div className="input-group">
+                                <label>Phone</label>
+                                <input type="text" name="phone" onChange={handleChange} />
+                            </div>
+                            <div className="input-group">
+                                <label>Email</label>
+                                <input type="email" name="email" onChange={handleChange} />
+                            </div>
+                            <div className="input-group">
+                                <label>Address</label>
+                                <input type="text" name="address" onChange={handleChange} />
+                            </div>
+                            <div className="input-group">
+                                <label>Username</label>
+                                <input type="text" name="username" onChange={handleChange} />
+                            </div>
+                            <div className="input-group">
+                                <label>Password</label>
+                                <input type="password" name="password" onChange={handleChange} />
+                            </div>
+                        </form>
+                    </div>
+
+                    {/* Botón de registro */}
+                    <button type="submit" className="submit-btn">
+                        Register
+                    </button>
+
+                    {/* Enlace para volver a la página de login */}
+                    <Link to="/login" className="back-to-login">
+                        Back to login
+                    </Link>
                 </div>
             </div>
         </div>

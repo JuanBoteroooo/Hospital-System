@@ -1,116 +1,192 @@
 /* Estructura de la página, ocupando toda la pantalla */
-.register-page {
+.page-container {
     display: flex;
-    flex-direction: row;
     height: 100vh;
-    width: 100vw; /* Asegura que ocupe todo el ancho */
+    width: 100vw;
+    background-color: #f5f5f5;
 }
 
-/* Sección izquierda para la cuadrícula de imágenes */
+/* Sección izquierda con un degradado de fondo */
 .left-section {
-    width: 50%; /* Ocupa el 50% de la pantalla */
-    background-color: #3ad4dc; /* Color de fondo */
+    width: 50%;
+    background: linear-gradient(135deg, #e968c9, #3ad4dc);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px; /* Espacio alrededor de la cuadrícula */
-    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 }
 
-/* Cuadrícula de imágenes */
-.image-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
-    grid-template-rows: 1fr; /* 1 fila */
-    gap: 15px; /* Espacio entre las imágenes */
-    width: 100%; /* Ocupa todo el ancho disponible */
-    height: auto; /* Ajusta la altura automáticamente */
-    box-sizing: border-box;
+/* Animación para los círculos */
+@keyframes moveCircle1 {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(30px, -30px); /* Movimiento hacia arriba a la derecha */
+    }
+    100% {
+        transform: translate(0, 0);
+    }
 }
 
-/* Estilos para las imágenes */
-.grid-image {
-    width: 100%;
-    height: auto; /* Ajusta la altura automáticamente */
-    object-fit: contain; /* Asegura que las imágenes se vean completas */
-    border-radius: 5px;
-    transition: transform 0.3s ease; /* Transición suave */
+@keyframes moveCircle2 {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(-30px, 30px); /* Movimiento hacia abajo a la izquierda */
+    }
+    100% {
+        transform: translate(0, 0);
+    }
 }
 
-/* Animación al pasar el mouse */
-.grid-image:hover {
-    transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el mouse */
+/* Forma decorativa principal (círculo) detrás de la imagen */
+.left-section::before {
+    content: "";
+    position: absolute;
+    width: 800px;
+    height: 900px;
+    background-color: rgba(15, 33, 190, 0.76);
+    border-radius: 50%;
+    top: 20%;
+    left: 10%;
+    z-index: 1;
+    animation: moveCircle1 6s ease-in-out infinite; /* Animación suave del primer círculo */
+}
+
+/* Segunda figura decorativa (círculo más pequeño) */
+.left-section::after {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background-color: rgba(180, 22, 22, 0.829);
+    border-radius: 50%;
+    bottom: 20%;
+    right: 15%;
+    z-index: 1;
+    animation: moveCircle2 8s ease-in-out infinite; /* Animación suave del segundo círculo */
+}
+
+/* Estilo para la imagen */
+.single-image {
+    position: relative;
+    z-index: 2; /* Asegura que la imagen esté delante de las formas */
+    width: 80%;
+    max-width: 400px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Sección derecha para el formulario */
 .right-section {
-    width: 50%; /* Ocupa el otro 50% de la pantalla */
+    width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff;
+    background-color: transparent;
 }
 
 /* Contenedor del formulario */
-.register-container {
-    background-color: white;
-    padding: 40px;
+.form-container {
+    background-color: #fff;
+    padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    width: 100%; /* Asegura que el contenedor se adapte bien */
-    max-width: 350px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Título fijo */
+.form-container h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+    background-color: #fff;
+    padding-bottom: 10px;
     text-align: center;
 }
 
-/* Estilo del título */
-h1 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
+/* Caja con scroll para los inputs */
+.input-scroll {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+    box-sizing: border-box;
+    max-height: calc(100% - 80px); /* Ajusta la altura de los inputs */
 }
 
-/* Estilos para los inputs */
+/* Estilo para los inputs */
 .input-group {
     margin-bottom: 15px;
 }
-
-label {
+.input-group label {
     font-size: 16px;
-    display: block;
     color: #666;
     margin-bottom: 8px;
+    display: block;
 }
-
-input {
+.input-group input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
 }
 
-/* Botón de registro */
-.register-btn {
+/* Botón fijo en la parte inferior */
+.submit-btn {
     width: 100%;
     padding: 12px;
-    background-color: #7a25ff;
+    background-color: #1bcbd8;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    position: relative;
+    bottom: 0;
 }
 
-.register-btn:hover {
-    background-color: #5b00a3;
+.submit-btn:hover {
+    background-color: #0a17c7;
 }
 
-/* Enlace de regreso a login */
+/* Botón de registro */
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #1bcbd8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    position: relative;
+    bottom: 0;
+}
+
+.submit-btn:hover {
+    background-color: #0a17c7;
+}
+
+/* Enlace para volver a login */
 .back-to-login {
-    display: inline-block;
+    display: block;
     margin-top: 15px;
     font-size: 14px;
-    color: #5b00a3;
+    color: #1bcbd8;
+    text-align: center;
     text-decoration: none;
 }
 
