@@ -13,9 +13,9 @@ POST http://localhost:3000/register
 Content-Type: application/json
 
 {
-    "username": "juan",
-    "password": "12bote34",
-    "email": null
+    "username": "adriana",
+    "password": "abril0304",
+    "email": "adrianakmontiele@gmail.com"
 }
 
 ### Logout Request
@@ -25,3 +25,8 @@ POST http://localhost:3000/logout
 ### hasSession Request
 
 POST http://localhost:3000/hasSession
+Content-Type: application/json
+    
+    {
+        "token": "eyJhbG"
+    }
