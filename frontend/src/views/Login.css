@@ -1,51 +1,104 @@
-/* Estructura de la página, ocupando toda la pantalla */
+/* Estructura de la página de login, ocupando toda la pantalla */
 .login-page {
     display: flex;
     flex-direction: row;
     height: 100vh;
-    width: 100vw; /* Asegura que ocupe todo el ancho */
+    width: 100vw;
+    background-color: #f5f5f5; /* Fondo gris claro */
 }
 
-/* Sección izquierda para la cuadrícula, ocupando todo el espacio morado */
+/* Sección izquierda con un degradado de fondo */
 .left-section {
-    width: 50%; /* Ocupa el 50% de la pantalla */
-    background-color: #3ad4dc;
+    width: 50%;
+    background: linear-gradient(135deg, #e968c9, #3ad4dc); /* Degradado de color */
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px; /* Espacio alrededor de la cuadrícula */
-    box-sizing: border-box;
+    position: relative; /* Posición relativa para colocar formas detrás de la imagen */
+    overflow: hidden; /* Para asegurar que las figuras no se desborden */
 }
 
-/* Cuadrícula ajustada a 1 fila y 3 columnas */
-.image-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
-    gap: 20px; /* Mayor espacio entre las imágenes */
-    width: 80%; /* Ocupa el 80% del ancho disponible */
-    height: auto; /* Ajusta la altura automáticamente */
-    justify-content: center; /* Centra las imágenes */
-    align-items: center; /* Centra las imágenes verticalmente */
-    box-sizing: border-box;
+/* Animación para los círculos */
+@keyframes moveCircle1 {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(30px, -30px); /* Movimiento hacia arriba a la derecha */
+    }
+    100% {
+        transform: translate(0, 0);
+    }
 }
 
-/* Imágenes que ocupan toda la celda de la cuadrícula */
-.grid-image {
-    width: 100%; /* Ocupa todo el ancho del contenedor */
-    height: 300px; /* Ajusta la altura de las imágenes para que sean grandes */
-    object-fit: cover; /* Asegura que las imágenes mantengan su proporción */
+@keyframes moveCircle2 {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(-30px, 30px); /* Movimiento hacia abajo a la izquierda */
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* Forma decorativa principal (círculo) detrás de la imagen */
+.left-section::before {
+    content: "";
+    position: absolute;
+    width: 800px;
+    height: 900px;
+    background-color: rgba(15, 33, 190, 0.76);
+    border-radius: 50%;
+    top: 20%;
+    left: 10%;
+    z-index: 1;
+    animation: moveCircle1 6s ease-in-out infinite; /* Animación suave del primer círculo */
+}
+
+/* Segunda figura decorativa (círculo más pequeño) */
+.left-section::after {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background-color: rgba(180, 22, 22, 0.829);
+    border-radius: 50%;
+    bottom: 20%;
+    right: 15%;
+    z-index: 1;
+    animation: moveCircle2 8s ease-in-out infinite; /* Animación suave del segundo círculo */
+}
+
+/* Figura poligonal detrás de la imagen */
+.left-section .polygon {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background-color: rgba(255, 255, 255, 0.1);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+/* Estilo para la imagen */
+.single-image {
+    position: relative;
+    z-index: 2; /* Asegura que la imagen esté delante de las formas */
+    width: 80%;
+    max-width: 400px;
+    height: auto;
+    object-fit: contain;
     border-radius: 10px;
-    transition: transform 0.3s ease; /* Transición suave */
-}
-
-/* Animación al pasar el mouse */
-.grid-image:hover {
-    transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el mouse */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Sombra suave alrededor de la imagen */
 }
 
 /* Sección derecha para el formulario */
 .right-section {
-    width: 50%; /* Ocupa el otro 50% de la pantalla */
+    width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,12 +107,12 @@
 
 /* Contenedor del formulario */
 .login-container {
-    background-color: white;
+    background-color: #fff;
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    width: 100%; /* Asegura que el contenedor se adapte bien */
-    max-width: 350px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    width: 100%;
+    max-width: 400px; /* Limita el ancho del formulario */
     text-align: center;
 }
 
@@ -70,49 +123,54 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* Estilos para los inputs */
+/* Estilo para los inputs */
 .input-group {
     margin-bottom: 15px;
 }
 
 label {
     font-size: 16px;
-    display: block;
     color: #666;
     margin-bottom: 8px;
 }
 
+/* Estilo para los inputs */
 input {
-    width: 100%;
-    padding: 10px;
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
+    margin-bottom: 15px;
+    box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
 }
 
-/* Botón de login */
+/* Estilo para el botón de login */
 .login-btn {
-    width: 100%;
+    width: 100%; /* Mantén el ancho completo */
+    max-width: 400px; /* Limita el ancho máximo del botón */
     padding: 12px;
-    background-color: #7a25ff;
+    background-color: #1bcbd8;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    display: block; /* Hace que el botón ocupe todo el ancho del contenedor */
+    margin: 0 auto; /* Centra el botón horizontalmente */
 }
 
 .login-btn:hover {
-    background-color: #5b00a3;
+    background-color: #0a17c7;
 }
 
-/* Enlaces de Forgot password y Create Account */
+/* Enlace para recuperar contraseña y crear cuenta */
 .forgot-password,
 .create-account {
     display: inline-block;
     margin-top: 15px;
     font-size: 14px;
-    color: #5b00a3;
+    color: #180db9;
     text-decoration: none;
 }
 
@@ -121,7 +179,7 @@ input {
     text-decoration: underline;
 }
 
-/* Añadir separación entre los dos enlaces */
+/* Añadir espacio entre los enlaces */
 .create-account {
     margin-left: 15px;
 }
