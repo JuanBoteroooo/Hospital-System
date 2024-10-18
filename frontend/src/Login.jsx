@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
-import axios from "axios"; // Importar Axios
+import { useNavigate } from "react-router-dom"; // Importar useNavigate para la redirección
+import axios from "axios";
 
 // Importa las imágenes
 import TallerV from "./assets/images/Taller V.png";
@@ -10,9 +11,10 @@ import imagen6 from "./assets/images/imagen 6.jpg";
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [errorMessage, setErrorMessage] = useState(""); // Para manejar errores
+    const [errorMessage, setErrorMessage] = useState("");
 
-    // Manejo del envío del formulario
+    const navigate = useNavigate(); // Hook para navegar a otra ruta
+
     const handleLogin = async (event) => {
         event.preventDefault();
         try {
@@ -22,8 +24,8 @@ const Login = () => {
             });
 
             console.log("Login exitoso:", response.data);
-            // Aquí puedes manejar lo que ocurre después de un login exitoso,
-            // como redirigir al usuario a otra página o guardar el token.
+            // Redirigir al usuario a la página principal después del login exitoso
+            navigate("/");
         } catch (error) {
             setErrorMessage("Error al iniciar sesión. Por favor, verifica tus credenciales.");
             console.error("Error en el login:", error);
@@ -60,7 +62,7 @@ const Login = () => {
                         <a href="#" className="forgot-password">
                             Forgot password?
                         </a>
-                        <a href="#" className="create-account">
+                        <a href="/register" className="create-account">
                             Create Account
                         </a>
                     </form>
