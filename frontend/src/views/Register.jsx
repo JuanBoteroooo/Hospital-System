@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import "./Login.css"; // Podemos reutilizar el mismo CSS
+import "./Register.css";
 
 // Importa las imágenes
-import TallerV from "./assets/images/Taller V.png";
-import imagen4 from "./assets/images/imagen 4.jpg";
-import imagen6 from "./assets/images/imagen 6.jpg";
+import TallerV from "../assets/images/TallerV.png";
+import imagen4 from "../assets/images/imagen4.jpg";
+import imagen6 from "../assets/images/imagen6.jpg";
 import axios from "axios"; // Importar Axios
 
 const Register = () => {
@@ -42,6 +42,7 @@ const Register = () => {
             <div className="left-section">
                 <div className="image-grid">
                     <img src={imagen4} alt="image1" className="grid-image" />
+                    //
                     <img src={TallerV} alt="image3" className="grid-image" />
                     <img src={imagen6} alt="image2" className="grid-image" />
                 </div>

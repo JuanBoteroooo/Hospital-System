@@ -1,16 +1,18 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Asegúrate de importar Routes en lugar de Switch
-import Login from "./Login";
-import Register from "./Register";
-import Home from "./Home"; // Si tienes un componente Home
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "./views/Login";
+import Register from "./views/Register";
+import Home from "./views/Home";
 
 function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Home />} /> {/* Ruta para Home */}
-                <Route path="/login" element={<Login />} /> {/* Ruta para Login */}
-                <Route path="/register" element={<Register />} /> {/* Ruta para Register */}
+                {/* La ruta "/" ahora redirige al Login */}
+                <Route path="/" element={<Login />} /> {/* Login como página principal */}
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/home" element={<Home />} /> {/* Ruta para Home */}
             </Routes>
         </Router>
     );
