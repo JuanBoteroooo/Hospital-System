@@ -104,6 +104,7 @@ app.post('/logout', function (req, res) {
 
 // toProcess
 app.post('/toProcess', function (req, res) {
+  console.log('Request body:', req.body);
   console.log("Sesión actual en /toProcess:", req.session);  // Verifica si el profileId está en la sesión
   
   if (!sess.sessionExist(req)) {
@@ -113,7 +114,8 @@ app.post('/toProcess', function (req, res) {
   const jsonData = {
     userProfile: req.session.profileId,  // Esto debería estar en la sesión
     methodName: req.body.methodName,
-    objectName: req.body.objectName
+    objectName: req.body.objectName,
+    params: req.body.params
   };
 
   console.log("jsonData:", jsonData);  // Verifica si el perfil y los otros datos son correctos

@@ -1,12 +1,30 @@
 class Cita {
   constructor(db) {
-    this.db = db;  // Esto es por si en el futuro necesitas usar la base de datos
+    this.db = db;
   }
 
-  Crear(params) {
-    // Simulando la creación de una cita con los parámetros recibidos
-    console.log("Creando cita con los siguientes parámetros:", params);
-    return { msg: "Cita creada con éxito." };  // Puedes ajustar este mensaje según lo que quieras retornar
+  async Crear(params) {
+    // Asegúrate de que los parámetros están siendo recibidos
+    console.log('Parámetros recibidos en Crear:', params);
+    
+    if (!params) {
+      throw new Error("Parámetros no proporcionados.");
+    }
+
+    const { appointmentDate, appointmentTime, personId, EmployerId } = params;
+
+    try {
+      const result = await this.db.exe('agendarCita', [appointmentDate, appointmentTime, personId, EmployerId]);
+      if (result && result.rows.length > 0) {
+        console.log('Cita agendada:', result.rows[0]);
+        return { msg: "Cita agendada con éxito.", cita: result.rows[0] };
+      } else {
+        return { msg: "No se pudo agendar la cita." };
+      }
+    } catch (error) {
+      console.error('Error agendando cita:', error);
+      return { msg: "Error agendando la cita." };
+    }
   }
 }
 

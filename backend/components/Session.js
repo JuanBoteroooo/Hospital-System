@@ -18,8 +18,6 @@ const Session = class {
     );
   }
 
-  // autenticar(req) {}
-
   sessionExist(req) {
     if (req.session) {
       if (req.session.userId) {
