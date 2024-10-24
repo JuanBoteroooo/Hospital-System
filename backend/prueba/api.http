@@ -1,26 +1,43 @@
-### Login Request
+### Prueba de login
 POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-    "username": "juan",
-    "password": "12bote34"
+    "username": "johndoe",
+    "password": "securepassword1" 
 }
 
-### Register Request
+### Prueba de registro de un nuevo usuario
 POST http://localhost:3000/register
 Content-Type: application/json
 
 {
-    "username": "nuevoUsuario",
-    "password": "contrasenaSegura",
-    "name": "Juan",
-    "lastName": "Pérez",
-    "phone": "1234567890",
-    "email": "juan.perez@example.com",
-    "address": "Calle Falsa 123"
+    "username": "nuevo_usuario",
+    "password": "password123",
+    "name": "John",
+    "lastName": "Doe",
+    "phone": "123456789",
+    "email": "johndoe@example.com",
+    "address": "123 Calle Principal"
 }
 
-### Logout Request
+### Prueba de ejecución de un método
+POST http://localhost:3000/toProcess
+Content-Type: application/json
+Cookie: connect.sid=s%3AyOPJRcbNAWT43EqnxdIdmj4EF-_OqfVr.DA6DFSxDKZ%2FlSqFvnXZXeuDiX5syzmCCd2Ied8JFOQU;  
 
+{
+    "objectName": "Cita",
+    "methodName": "Crear", 
+    "params": {
+        "appointmentDate": "2024-11-10",
+        "appointmentTime": "10:00",
+        "doctorId": 1,
+        "patientId": 2
+    }
+}
+
+### Prueba de logout
 POST http://localhost:3000/logout
+Content-Type: application/json
+Cookie: connect.sid=<SESSION_ID> 
