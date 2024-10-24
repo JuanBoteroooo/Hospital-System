@@ -13,7 +13,7 @@ class Db {
         }
         const { Pool } = require("pg");
         this.pool = new Pool({
-          "database": "prueba",
+          "database": "clinica",
           "user": "postgres",
           "password": "12bote34",
           "port": 5432,

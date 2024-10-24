@@ -7,7 +7,6 @@ const port = 3000;
 //********************** IMPORTACION DE LOS QUERYS ***********************
 const cors_config = require('../backend/config/cors.json');
 const querys = require('../backend/data/querys.json');
-
 //********************** CONFIGURACIONES DEL APP ***********************
 app.use(cors(cors_config));
 app.use(express.static("public"));
@@ -21,7 +20,7 @@ app.use(express.urlencoded({ extended: false })); //body formulario
 //************************** inicio de sub sistemas ****************************
 global.sess = new (require("../backend/components/Session.js"))(app);
 global.db = new (require("../backend/components/Db.js"))(querys);
-// global.security = new (require("../backend/components/Security.js"))();
+global.security = new (require("../backend/components/Security.js"))();
 global.log = new (require('../backend/components/Log.js'))()
 //******************************************************************************
 
@@ -31,27 +30,23 @@ app.post('/login', async function (req, res) {
   const { username, password } = req.body;
   
   if (!username || !password) {
-      return res.status(400).send(`{"msg": "datos invalidos..!"}`);
+    return res.status(400).send(`{"msg": "Datos inválidos."}`);
   }
 
   try {
-      if (sess.sessionExist(req)) {
-          return res.status(400).send(`{"msg": "ya tiene sesión..!"}`);
-      }
+    if (sess.sessionExist(req)) {
+      return res.status(400).send(`{"msg": "Ya tiene sesión."}`);
+    }
 
-      const result = await db.exe('getUser', [username, password]);
-      if (result.rows.length > 0) {
-          req.session.userId = result.rows[0].user_id;
-          req.session.username = result.rows[0].username;
-          return res.send(`{"msg": "sesión creada..!"}`);
-      } else {
-          return res.status(401).send(`{"msg": "usuario no encontrado o contraseña incorrecta..!"}`);
-      }
+    // Aquí llamamos al método createSession de la clase Session
+    await sess.createSession(req, res);
+
   } catch (error) {
-      console.error('Login error:', error);
-      return res.status(500).send(`{"msg": "Internal server error..!"}`);
+    console.error('Error en el login:', error);
+    return res.status(500).send(`{"msg": "Error del servidor."}`);
   }
 });
+
 
 
 app.post('/register', async function (req, res) {
@@ -81,7 +76,7 @@ app.post('/register', async function (req, res) {
       }
   } catch (error) {
       console.error('Registration error:', error);
-      return res.status(500).send(`{"msg": "Internal server error..!"}`);
+      return res.status(500).send(`{"msg": "Error del servidor..!"}`);
   }
 });
 
@@ -103,24 +98,29 @@ app.post('/logout', function (req, res) {
 });
 
 // toProcess
-app.post('/toProcess', function (req, res) { 
-  if(sess.sessionExist(req)===false){
-    res.send(`{"msg": "debe hacer session..!"}`);
+app.post('/toProcess', function (req, res) {
+  console.log("Sesión actual en /toProcess:", req.session);  // Verifica si el profileId está en la sesión
+  
+  if (!sess.sessionExist(req)) {
+    return res.status(401).send({ msg: "Debe iniciar sesión." });
   }
-  else{
-    if(security.getPermission({
-      userProfile : req.session.userProfile,
-      objectName : req.body.objectName,
-      methodName : req.body.methodName,
-    })){
-      security.executeMethod(req.body);
-      res.send(`{"msg": "metodo ejecutado..!"}`);
-    }
-    else{
-      res.send(`{"msg": "No tiene permiso..!"}`);
-    }
+
+  const jsonData = {
+    userProfile: req.session.profileId,  // Esto debería estar en la sesión
+    methodName: req.body.methodName,
+    objectName: req.body.objectName
+  };
+
+  console.log("jsonData:", jsonData);  // Verifica si el perfil y los otros datos son correctos
+
+  if (security.getPermission(jsonData)) {
+    security.executeMethod(jsonData, res);
+    return res.send({ msg: "Método ejecutado con éxito." });
+  } else {
+    return res.status(403).send({ msg: "No tiene permiso." });
   }
 });
+
 //********************************************************************************
 
 // SERVIDOR
