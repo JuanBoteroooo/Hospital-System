@@ -24,16 +24,16 @@ Content-Type: application/json
 ### Prueba de ejecución de un método
 POST http://localhost:3000/toProcess
 Content-Type: application/json
-Cookie: connect.sid=s%3AyOPJRcbNAWT43EqnxdIdmj4EF-_OqfVr.DA6DFSxDKZ%2FlSqFvnXZXeuDiX5syzmCCd2Ied8JFOQU;  
+Cookie: connect.sid=s%3As80rrsw9UT73fPfk_grMVtH-pA3HDnJe.j84xgwCS17nVX%2B8QDtnu1ZZDvKkBBXtahxmmO7Ee66M;  
 
 {
     "objectName": "Cita",
-    "methodName": "Crear", 
+    "methodName": "Crear",
     "params": {
         "appointmentDate": "2024-11-10",
         "appointmentTime": "10:00",
-        "doctorId": 1,
-        "patientId": 2
+        "personId": 4,
+        "EmployerId": 1
     }
 }
 

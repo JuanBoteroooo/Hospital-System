@@ -2,7 +2,6 @@ const Security = class {
   constructor() {
     this.permission = new Map();
     this.loadAllPermissions(); // Cargar todos los permisos al iniciar el servidor
-    console.log("Permisos cargados:", this.permission);
   }
 
   // Cargar todos los permisos para todos los perfiles
@@ -40,16 +39,20 @@ const Security = class {
   executeMethod(jsonData, res) {
     try {
       console.log(`Intentando cargar el BO: ${jsonData.objectName}.js, método: ${jsonData.methodName}`);
-  
+      
       const BOClass = require(`../BO/${jsonData.objectName}.js`); 
-      const boInstance = new BOClass(this.db);
+      const boInstance = new BOClass(db);
       
       if (typeof boInstance[jsonData.methodName] === 'function') {
-        return boInstance[jsonData.methodName](jsonData.params);
+        // Ejecutar el método y devolver la respuesta
+        const result = boInstance[jsonData.methodName](jsonData.params);
+        
+        // Enviar respuesta exitosa
+        res.status(200).send({ msg: 'Método ejecutado con éxito', result });
       } else {
         throw new Error(`Método '${jsonData.methodName}' no encontrado en el BO '${jsonData.objectName}'`);
       }
-  
+    
     } catch (error) {
       if (error.code === 'MODULE_NOT_FOUND') {
         console.error(`Error: El BO '${jsonData.objectName}.js' no existe.`);
@@ -58,7 +61,6 @@ const Security = class {
         console.error('Error ejecutando el método en el BO:', error);
         res.status(500).send({ msg: `Error ejecutando el método '${jsonData.methodName}' en el BO '${jsonData.objectName}'` });
       }
-      throw error;
     }
   }
 };
