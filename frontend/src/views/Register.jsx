@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Register.css";
 import imagen4 from "../assets/images/imagen4.jpg"; // Importa la imagen directamente
-import axios from "axios"; // Importa axios
+import axiosInstance from "../axiosConfig"; // Importa axios
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -23,7 +23,7 @@ const Register = () => {
         e.preventDefault();
         try {
             // Enviar los datos de registro al servidor
-            const response = await axios.post("http://localhost:3000/register", formData);
+            const response = await axiosInstance.post("http://localhost:3000/register", formData);
             console.log("Response:", response.data);
             // Aquí puedes redirigir o manejar el registro exitoso
         } catch (error) {

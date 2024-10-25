@@ -1,0 +1,58 @@
+### crear cita
+POST http://localhost:3000/toProcess
+Content-Type: application/json
+Cookie: connect.sid=s%3AKG-AbBlYxHtbXYAZmmI4WyBxlXT_4uAh.fPCL8vVUMIT19tlUPaCli8V8CcIn69ougqn5jBy3Vlg
+
+{
+    "objectName": "Cita",
+    "methodName": "Crear", 
+    "params": {
+        "appointmentDate": "2024-11-15",
+        "appointmentTime": "14:30",
+        "personId": 4,
+        "EmployerId": 1
+    }
+}
+
+### ver cita
+POST http://localhost:3000/toProcess
+Content-Type: application/json
+Cookie: connect.sid=s%3AgqstOPvPH0fgZTefqEa8dNLwhQwHezp_.7LgdiqHeDq03PYYajG80rKTq%2BrvGyGimKTWD2z1Od2w
+
+{
+    "objectName": "Cita",
+    "methodName": "Ver", 
+    "params": {
+        "appointmentId": 2
+    }
+}
+
+### modificar cita
+POST http://localhost:3000/toProcess
+Content-Type: application/json
+Cookie: connect.sid=s%3AgqstOPvPH0fgZTefqEa8dNLwhQwHezp_.7LgdiqHeDq03PYYajG80rKTq%2BrvGyGimKTWD2z1Od2w
+
+{
+    "objectName": "Cita",
+    "methodName": "Modificar", 
+    "params": {
+        "appointmentId": 2,
+        "appointmentDate": "2024-11-18",
+        "appointmentTime": "13:00",
+        "personId": 4,
+        "EmployerId": 1
+    }
+}
+
+### eliminar cita
+POST http://localhost:3000/toProcess
+Content-Type: application/json
+Cookie: connect.sid=s%3AgqstOPvPH0fgZTefqEa8dNLwhQwHezp_.7LgdiqHeDq03PYYajG80rKTq%2BrvGyGimKTWD2z1Od2w
+
+{
+    "objectName": "Cita",
+    "methodName": "Eliminar", 
+    "params": {
+        "appointmentId": 4
+    }
+}

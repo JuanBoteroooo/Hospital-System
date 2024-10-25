@@ -105,8 +105,8 @@ app.post('/logout', function (req, res) {
 // toProcess
 app.post('/toProcess', function (req, res) {
   console.log('Request body:', req.body);
-  console.log("Sesión actual en /toProcess:", req.session);  // Verifica si el profileId está en la sesión
-  
+  console.log("Sesión actual en /toProcess:", req.session);
+
   if (!sess.sessionExist(req)) {
     return res.status(401).send({ msg: "Debe iniciar sesión." });
   }
@@ -120,13 +120,17 @@ app.post('/toProcess', function (req, res) {
 
   console.log("jsonData:", jsonData);  // Verifica si el perfil y los otros datos son correctos
 
+  // Verificación de permisos
   if (security.getPermission(jsonData)) {
-    security.executeMethod(jsonData, res);
-    return res.send({ msg: "Método ejecutado con éxito." });
+    // security.executeMethod ya debe enviar la respuesta
+    const result = security.executeMethod(jsonData, res); 
+    console.log("Resultado de la ejecución del método:", result);
   } else {
+    // Si no tiene permisos, envía esta respuesta
     return res.status(403).send({ msg: "No tiene permiso." });
   }
 });
+
 
 //********************************************************************************
 

@@ -1,98 +1,35 @@
-/* Estructura general que ocupa toda la pantalla */
 .home-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Asegura que ocupe toda la altura de la pantalla */
-    height: 100vh;
-    width: 100vw; /* Asegura que ocupe todo el ancho de la pantalla */
-    overflow: hidden; /* Evita que el contenido se desborde */
-    background-color: #f5f5f5;
-    box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
-}
-
-/* Estilo de la barra de navegación */
-.navbar {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    background-color: #1bcbd8;
-    padding: 20px;
-    color: white;
-    width: 100%;
-    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
-}
-
-.navbar-logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.navbar-buttons {
-    display: flex;
-    gap: 20px;
-}
-
-.navbar-btn {
-    background-color: #ffffff;
-    color: #1bcbd8;
-    border: 2px solid #1bcbd8;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.navbar-btn:hover {
-    background-color: #1bcbd8;
-    color: white;
-}
-
-/* Contenido Principal */
-.main-content {
-    display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    flex-grow: 1; /* Hace que el contenido ocupe todo el espacio disponible */
-    text-align: center;
-    padding: 20px;
-    width: 100%;
-    box-sizing: border-box;
-    overflow: auto; /* Permite el scroll si es necesario */
+    height: 100vh;
+    width: 100vw;
+    background-color: #f5f5f5; /* O el color que prefieras */
 }
 
-.main-content h1 {
-    font-size: 3rem;
+h1 {
     color: #333;
     margin-bottom: 20px;
 }
 
-.main-content p {
-    font-size: 1.5rem;
-    color: #666;
-    margin-bottom: 40px;
-}
-
-/* Botones de acción */
-.action-buttons {
+.buttons-container {
     display: flex;
-    gap: 20px;
-    flex-wrap: wrap; /* Asegura que los botones no se desborden en pantallas más pequeñas */
-    justify-content: center; /* Centra los botones en la pantalla */
-    max-width: 100%; /* Evita que los botones se desborden del contenedor */
+    flex-direction: column;
+    gap: 10px;
 }
 
-.btn-primary {
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
     background-color: #1bcbd8;
     color: white;
     border: none;
-    padding: 15px 30px;
-    font-size: 1.2rem;
     border-radius: 5px;
-    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.btn-primary:hover {
+.btn:hover {
     background-color: #0a17c7;
 }

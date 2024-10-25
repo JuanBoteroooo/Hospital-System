@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import imagen4 from "../assets/images/imagen4.jpg";
-import axios from "axios";
+import axiosInstance from "../axiosConfig";
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -12,7 +12,7 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault(); // Previene la recarga de la página
         try {
-            const response = await axios.post("http://localhost:3000/login", { username, password }, { withCredentials: true });
+            const response = await axiosInstance.post("http://localhost:3000/login", { username, password });
             console.log("Login response:", response);
             if (response.status === 200) {
                 navigate("/"); // Navega a la página Home

@@ -21,22 +21,6 @@ Content-Type: application/json
     "address": "123 Calle Principal"
 }
 
-### Prueba de ejecución de un método
-POST http://localhost:3000/toProcess
-Content-Type: application/json
-Cookie: connect.sid=s%3As80rrsw9UT73fPfk_grMVtH-pA3HDnJe.j84xgwCS17nVX%2B8QDtnu1ZZDvKkBBXtahxmmO7Ee66M;  
-
-{
-    "objectName": "Cita",
-    "methodName": "Crear",
-    "params": {
-        "appointmentDate": "2024-11-10",
-        "appointmentTime": "10:00",
-        "personId": 4,
-        "EmployerId": 1
-    }
-}
-
 ### Prueba de logout
 POST http://localhost:3000/logout
 Content-Type: application/json
