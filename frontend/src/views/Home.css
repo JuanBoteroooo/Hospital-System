@@ -2,96 +2,35 @@
 .home-page {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    width: 100vw;
-    background-color: #f0f8ff; /* Fondo más claro */
-    font-family: "Arial", sans-serif;
-}
-
-/* Estilo para la navbar */
-.navbar {
-    background-color: #1bcbd8; /* Color de fondo turquesa */
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-    width: 100%; /* Asegura que ocupe todo el ancho */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-}
-
-/* Estilo para el logo o título */
-.navbar h1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0;
-    color: #ffffff;
-}
-
-/* Lista de navegación */
-.nav-list {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-}
-
-/* Elementos de la lista de navegación */
-.nav-item {
-    margin-left: 20px;
-}
-
-.nav-item a {
-    text-decoration: none;
-    color: #ffffff;
-    font-size: 18px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-/* Estilo cuando pasamos el mouse sobre los enlaces */
-.nav-item a:hover {
-    background-color: #17a2b8; /* Tono turquesa más oscuro cuando se hace hover */
+    height: 100%;
+    width: 100%;
+    background-color: #76a6f0;
 }
 
 /* Estilo para la sección principal del contenido */
 .home-container {
-    flex: 1;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); /* Sombra en el contenido principal */
-    margin: 0;
-    width: 100%; /* Asegura que ocupe todo el ancho */
-    height: 100%; /* Asegura que ocupe todo el alto */
-    border-radius: 0; /* Elimina el borde redondeado para ocupar toda la pantalla */
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
 }
 
 /* Título del home */
 .home-container h1 {
-    font-size: 36px;
-    color: #333;
-    margin-bottom: 20px;
+    font-size: 90px;
+    color: white;
+    font-style: italic;
 }
 
 /* Estilo del párrafo */
 .home-container p {
     font-size: 18px;
-    color: #666;
+    color: #76a6f0;
 }
 
-/* Mejoras para dispositivos móviles */
-@media (max-width: 768px) {
-    .nav-item a {
-        padding: 8px 16px;
-        font-size: 16px;
-    }
-
-    .home-container h1 {
-        font-size: 28px;
-    }
+.card-wrap{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 10px;
 }
