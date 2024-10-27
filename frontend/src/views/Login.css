@@ -4,164 +4,97 @@
     flex-direction: row;
     height: 100vh;
     width: 100vw;
-    background-color: #f5f5f5; /* Fondo gris claro */
-}
-
-/* Sección izquierda con un degradado de fondo */
-.left-section {
-    width: 50%;
-    background: linear-gradient(135deg, #e968c9, #3ad4dc); /* Degradado de color */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative; /* Posición relativa para colocar formas detrás de la imagen */
-    overflow: hidden; /* Para asegurar que las figuras no se desborden */
-}
-
-/* Animación para los círculos */
-@keyframes moveCircle1 {
-    0% {
-        transform: translate(0, 0);
-    }
-    50% {
-        transform: translate(30px, -30px); /* Movimiento hacia arriba a la derecha */
-    }
-    100% {
-        transform: translate(0, 0);
-    }
-}
-
-@keyframes moveCircle2 {
-    0% {
-        transform: translate(0, 0);
-    }
-    50% {
-        transform: translate(-30px, 30px); /* Movimiento hacia abajo a la izquierda */
-    }
-    100% {
-        transform: translate(0, 0);
-    }
-}
-
-/* Forma decorativa principal (círculo) detrás de la imagen */
-.left-section::before {
-    content: "";
-    position: absolute;
-    width: 800px;
-    height: 900px;
-    background-color: rgba(15, 33, 190, 0.76);
-    border-radius: 50%;
-    top: 20%;
-    left: 10%;
-    z-index: 1;
-    animation: moveCircle1 6s ease-in-out infinite; /* Animación suave del primer círculo */
-}
-
-/* Segunda figura decorativa (círculo más pequeño) */
-.left-section::after {
-    content: "";
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    background-color: rgba(180, 22, 22, 0.829);
-    border-radius: 50%;
-    bottom: 20%;
-    right: 15%;
-    z-index: 1;
-    animation: moveCircle2 8s ease-in-out infinite; /* Animación suave del segundo círculo */
-}
-
-/* Figura poligonal detrás de la imagen */
-.left-section .polygon {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    background-color: rgba(255, 255, 255, 0.1);
-    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-    top: 50%;
-    left: 60%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-}
-
-/* Estilo para la imagen */
-.single-image {
-    position: relative;
-    z-index: 2; /* Asegura que la imagen esté delante de las formas */
-    width: 80%;
-    max-width: 400px;
-    height: auto;
-    object-fit: contain;
-    border-radius: 10px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Sombra suave alrededor de la imagen */
-}
-
-/* Sección derecha para el formulario */
-.right-section {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffffff;
+    background-image: url(../assets/images/background1.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
 }
 
 /* Contenedor del formulario */
 .login-container {
+    display: flex;
+    flex-direction: row;
     background-color: #fff;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1); /* Sombra suave */
     width: 100%;
-    max-width: 400px; /* Limita el ancho del formulario */
+    max-width: 400px;
     text-align: center;
+    align-self: center;
+    margin: 0 auto;
 }
 
-/* Estilo del título */
-h1 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
+.container-center{
+    width: 100%;
+    height: 100%;
+    align-self: center;
+    /* Estilo del título */
+    h1 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 40px;
+    }
+    form{
+        .input-group {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        /* Estilo para los inputs */
+
+        label {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        /* Estilo para los inputs */
+        input {
+            width: 100%; /* Ocupa todo el ancho del contenedor */
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        /* Estilo para el botón de login */
+        .login-btn {
+            width: 100%; /* Mantén el ancho completo */
+            max-width: 400px; /* Limita el ancho máximo del botón */
+            padding: 12px;
+            background-color: #76a6f0;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block; /* Hace que el botón ocupe todo el ancho del contenedor */
+            margin: 0 auto; /* Centra el botón horizontalmente */
+        }
+
+        .login-btn:hover {
+            background-color: #0a17c7;
+        }
+    }
 }
 
-/* Estilo para los inputs */
-.input-group {
-    margin-bottom: 15px;
-}
+.img{
+    width: 50%;
+    height: 100%;
 
-label {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 8px;
-}
-
-/* Estilo para los inputs */
-input {
-    width: 100%; /* Ocupa todo el ancho del contenedor */
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    margin-bottom: 15px;
-    box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
-}
-
-/* Estilo para el botón de login */
-.login-btn {
-    width: 100%; /* Mantén el ancho completo */
-    max-width: 400px; /* Limita el ancho máximo del botón */
-    padding: 12px;
-    background-color: #1bcbd8;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    display: block; /* Hace que el botón ocupe todo el ancho del contenedor */
-    margin: 0 auto; /* Centra el botón horizontalmente */
-}
-
-.login-btn:hover {
-    background-color: #0a17c7;
+    img{
+        width: 100%;
+        filter: drop-shadow(
+            0 0 10px rgba(0, 0, 0, .8)
+        );
+        mask-image: linear-gradient(
+            black 80%,
+            transparent
+        );
+    }
 }
 
 /* Enlace para recuperar contraseña y crear cuenta */

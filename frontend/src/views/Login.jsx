@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import imagen4 from "../assets/images/imagen4.jpg";
-import axiosInstance from "../axiosConfig";
+import axios from "axios";
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -29,18 +28,16 @@ const Login = () => {
 
     return (
         <div className="login-page">
-            <div className="left-section">
-                <img src={imagen4} alt="Login visual" className="single-image" />
-            </div>
-            <div className="right-section">
-                <div className="login-container">
+            <div className="login-container">
+                {/* <div className="img">
+                    <img src={jose} alt="aaa" className="img" />
+                </div> */}
+                <div className="container-center">
                     <h1>Hello! Welcome to CCARDIOZ</h1>
                     <form onSubmit={handleLogin}>
                         <div className="input-group">
                             <label htmlFor="username">Username</label>
                             <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" required />
-                        </div>
-                        <div className="input-group">
                             <label htmlFor="password">Password</label>
                             <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
                         </div>
