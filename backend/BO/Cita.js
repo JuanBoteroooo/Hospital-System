@@ -35,8 +35,10 @@ class Cita {
       throw new Error("ID de la cita no proporcionado.");
     }
 
+    const {appointmentId} = params;
+
     try {
-      const result = await this.db.exe('verCita', [params.appointmentId]);
+      const result = await this.db.exe('verCita', [appointmentId]);
       if (result && result.rows.length > 0) {
         console.log('Cita encontrada:', result.rows[0]);
         return { msg: "Cita encontrada.", cita: result.rows[0] };

@@ -120,13 +120,10 @@ app.post('/toProcess', function (req, res) {
 
   console.log("jsonData:", jsonData);  // Verifica si el perfil y los otros datos son correctos
 
-  // Verificación de permisos
   if (security.getPermission(jsonData)) {
-    // security.executeMethod ya debe enviar la respuesta
     const result = security.executeMethod(jsonData, res); 
     console.log("Resultado de la ejecución del método:", result);
   } else {
-    // Si no tiene permisos, envía esta respuesta
     return res.status(403).send({ msg: "No tiene permiso." });
   }
 });

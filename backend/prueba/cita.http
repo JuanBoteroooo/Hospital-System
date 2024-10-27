@@ -17,7 +17,7 @@ Cookie: connect.sid=s%3AKG-AbBlYxHtbXYAZmmI4WyBxlXT_4uAh.fPCL8vVUMIT19tlUPaCli8V
 ### ver cita
 POST http://localhost:3000/toProcess
 Content-Type: application/json
-Cookie: connect.sid=s%3AgqstOPvPH0fgZTefqEa8dNLwhQwHezp_.7LgdiqHeDq03PYYajG80rKTq%2BrvGyGimKTWD2z1Od2w
+Cookie: connect.sid=s%3AF1BXGFnEiPVQTfaTcLS1HFmQy0Yp1pLJ.RD%2BVDDp3VUUPqZGqMsT3eXDFl0nua4qf4Nyrxbkxugs
 
 {
     "objectName": "Cita",

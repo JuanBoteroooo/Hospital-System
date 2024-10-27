@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./Home.css"; // Asegúrate de que Home.css esté adecuadamente configurado para este diseño
+import "./Home.css";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -21,7 +21,9 @@ const Home = () => {
                 <button onClick={() => navigate("/eliminar-cita")} className="btn">
                     Eliminar Cita
                 </button>
-                {/* Agrega más botones para otros BO si es necesario */}
+                <button onClick={() => navigate("/login")} className="btn">
+                    Log out
+                </button>
             </div>
         </div>
     );

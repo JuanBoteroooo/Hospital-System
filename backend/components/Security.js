@@ -16,6 +16,7 @@ const Security = class {
           console.log("Cargando permiso para la clave:", key); 
           this.permission.set(key, true); // Almacenar el permiso en el Map
         });
+        console.log(this.permission);
       })
       .catch((error) => {
         console.error('Error cargando permisos:', error);
