@@ -12,9 +12,10 @@
   }
   /* Logo o nombre de la aplicación */
   .navbar-logo h1 {
-    color: #76a6f0;
+    color: #3e5b97;
     font-size: 24px;
     margin: 0;
+    cursor: pointer;
   }
   
   /* Lista de enlaces en la barra */
@@ -23,10 +24,14 @@
     display: flex;
     gap: 20px;
   }
+
+  .navbar-links li{
+    align-content: center;
+  }
   
   /* Estilo para los enlaces */
   .navbar-links li a {
-    color: #76a6f0;
+    color: #3e5b97;
     text-decoration: none;
     font-size: 18px;
     transition: color 0.3s ease;
@@ -41,10 +46,9 @@
   .logout-btn {
     background-color: transparent; /* Fondo transparente */
     border: none; /* Sin bordes */
-    color: #76a6f0;
-    font-size: 18px;
     cursor: pointer; /* Cambia el cursor a pointer */
     transition: color 0.3s ease;
+    
   }
   
   /* Hover effect para el botón de logout */

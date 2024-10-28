@@ -128,6 +128,13 @@ app.post('/toProcess', function (req, res) {
   }
 });
 
+app.get('/sessionExist', (req, res) => {
+  if (sess.sessionExist(req)) {
+    res.send({ session: true });
+  } else {
+    res.send({ session: false });
+  }
+});
 
 //********************************************************************************
 

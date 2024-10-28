@@ -17,11 +17,6 @@ function App() {
 
                 {/* Ruta para home */}
                 <Route path="/" element={<Home />} />
-
-                <Route path="/crear-cita" element={<CitaCrear />} />
-                <Route path="/ver-cita" element={<CitaVer />} />
-                <Route path="/modificar-cita" element={<CitaEditar />} />
-                <Route path="/eliminar-cita" element={<CitaEliminar />} />
             </Routes>
         </Router>
     );

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Register.css";
-import imagen4 from "../assets/images/imagen4.jpg"; // Importa la imagen directamente
-import axiosInstance from "../axiosConfig"; // Importa axios
+import axiosInstance from "../axiosConfig";
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -14,75 +13,55 @@ const Register = () => {
         email: "",
         address: "",
     });
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleRegister = async (e) => {
+        e.preventDefault(); // Previene la recarga de la página
         try {
-            // Enviar los datos de registro al servidor
             const response = await axiosInstance.post("http://localhost:3000/register", formData);
-            console.log("Response:", response.data);
-            // Aquí puedes redirigir o manejar el registro exitoso
+            console.log("Register response:", response);
+            if (response.status === 200) {
+                navigate("/login"); // Navega a la página de login después de un registro exitoso
+            }
         } catch (error) {
             console.error("Error during registration:", error);
+            alert("An error occurred during registration.");
         }
     };
 
     return (
-        <div className="page-container">
-            {/* Sección izquierda con decoraciones e imagen */}
-            <div className="left-section">
-                <img src={imagen4} alt="Decorative" className="single-image" />
-            </div>
-
-            {/* Sección derecha para el formulario */}
-            <div className="right-section">
-                <div className="form-container">
-                    <h1>Register</h1>
-                    <div className="input-scroll">
-                        <form onSubmit={handleSubmit}>
-                            <div className="input-group">
-                                <label>Username</label>
-                                <input type="text" name="username" onChange={handleChange} />
-                            </div>
-                            <div className="input-group">
-                                <label>Password</label>
-                                <input type="password" name="password" onChange={handleChange} />
-                            </div>
-                            <div className="input-group">
-                                <label>First Name</label>
-                                <input type="text" name="name" onChange={handleChange} />
-                            </div>
-                            <div className="input-group">
-                                <label>Last Name</label>
-                                <input type="text" name="lastName" onChange={handleChange} />
-                            </div>
-                            <div className="input-group">
-                                <label>Phone</label>
-                                <input type="text" name="phone" onChange={handleChange} />
-                            </div>
-                            <div className="input-group">
-                                <label>Email</label>
-                                <input type="email" name="email" onChange={handleChange} />
-                            </div>
-                            <div className="input-group">
-                                <label>Address</label>
-                                <input type="text" name="address" onChange={handleChange} />
-                            </div>
-                            {/* Botón de registro */}
-                            <button type="submit" className="submit-btn">
-                                Register
-                            </button>
-                        </form>
-                    </div>
-
-                    {/* Enlace para volver a la página de login */}
-                    <Link to="/login" className="back-to-login">
+        <div className="register-page">
+            <div className="register-container">
+                <div className="container-center">
+                    <h1>Welcome! Create an Account</h1>
+                    <form onSubmit={handleRegister}>
+                        <div className="input-group">
+                            <label htmlFor="username">Username</label>
+                            <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} placeholder="Username" required />
+                            <label htmlFor="password">Password</label>
+                            <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required />
+                            <label htmlFor="name">First Name</label>
+                            <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="First Name" required />
+                            <label htmlFor="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Last Name" required />
+                            <label htmlFor="phone">Phone</label>
+                            <input type="text" id="phone" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone" required />
+                            <label htmlFor="email">Email</label>
+                            <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required />
+                            <label htmlFor="address">Address</label>
+                            <input type="text" id="address" name="address" value={formData.address} onChange={handleChange} placeholder="Address" required />
+                        </div>
+                        <button type="submit" className="register-btn">
+                            Create Account
+                        </button>
+                    </form>
+                    <a href="/login" className="back-to-login">
                         Back to login
-                    </Link>
+                    </a>
                 </div>
             </div>
         </div>

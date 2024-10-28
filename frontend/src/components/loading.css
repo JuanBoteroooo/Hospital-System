@@ -1,0 +1,33 @@
+/* Centrar el contenedor de carga */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  /* SVG del corazón */
+  .heart-svg {
+    width: 140px;
+    height: 140px;
+    animation: heartbeat 1.5s infinite;
+  }
+  
+  /* Animación de latido */
+  @keyframes heartbeat {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: scale(1);
+    }
+    40% {
+      transform: scale(1.2);
+    }
+    60% {
+      transform: scale(1.1);
+    }
+  }
+  

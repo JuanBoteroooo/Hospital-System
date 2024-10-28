@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import axios from "axios";
+import axiosInstance from "../axiosConfig";
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -29,9 +29,6 @@ const Login = () => {
     return (
         <div className="login-page">
             <div className="login-container">
-                {/* <div className="img">
-                    <img src={jose} alt="aaa" className="img" />
-                </div> */}
                 <div className="container-center">
                     <h1>Hello! Welcome to CCARDIOZ</h1>
                     <form onSubmit={handleLogin}>

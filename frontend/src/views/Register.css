@@ -1,193 +1,98 @@
 /* Estructura de la página, ocupando toda la pantalla */
-.page-container {
+.register-page {
     display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
     height: 100vh;
     width: 100vw;
-    background-color: #f5f5f5;
-}
-
-/* Sección izquierda con un degradado de fondo */
-.left-section {
-    width: 50%;
-    background: linear-gradient(135deg, #e968c9, #3ad4dc);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-}
-
-/* Animación para los círculos */
-@keyframes moveCircle1 {
-    0% {
-        transform: translate(0, 0);
-    }
-    50% {
-        transform: translate(30px, -30px); /* Movimiento hacia arriba a la derecha */
-    }
-    100% {
-        transform: translate(0, 0);
-    }
-}
-
-@keyframes moveCircle2 {
-    0% {
-        transform: translate(0, 0);
-    }
-    50% {
-        transform: translate(-30px, 30px); /* Movimiento hacia abajo a la izquierda */
-    }
-    100% {
-        transform: translate(0, 0);
-    }
-}
-
-/* Forma decorativa principal (círculo) detrás de la imagen */
-.left-section::before {
-    content: "";
-    position: absolute;
-    width: 800px;
-    height: 900px;
-    background-color: rgba(15, 33, 190, 0.76);
-    border-radius: 50%;
-    top: 20%;
-    left: 10%;
-    z-index: 1;
-    animation: moveCircle1 6s ease-in-out infinite; /* Animación suave del primer círculo */
-}
-
-/* Segunda figura decorativa (círculo más pequeño) */
-.left-section::after {
-    content: "";
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    background-color: rgba(180, 22, 22, 0.829);
-    border-radius: 50%;
-    bottom: 20%;
-    right: 15%;
-    z-index: 1;
-    animation: moveCircle2 8s ease-in-out infinite; /* Animación suave del segundo círculo */
-}
-
-/* Estilo para la imagen */
-.single-image {
-    position: relative;
-    z-index: 2; /* Asegura que la imagen esté delante de las formas */
-    width: 80%;
-    max-width: 400px;
-    height: auto;
-    object-fit: contain;
-    border-radius: 10px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-}
-
-/* Sección derecha para el formulario */
-.right-section {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
+    background-image: url(../assets/images/background1.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 /* Contenedor del formulario */
-.form-container {
+.register-container {
+    display: flex;
+    flex-direction: column;
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1); /* Sombra suave */
     width: 100%;
     max-width: 400px;
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    position: relative;
-}
-
-/* Título fijo */
-.form-container h1 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 10px;
-    background-color: #fff;
-    padding-bottom: 10px;
+    height: 82vh; /* Ocupa el 80% de la altura de la pantalla */
+    scrollbar-width: none;
+    overflow-y: auto; /* Permite el desplazamiento cuando el contenido sobrepasa el contenedor */
     text-align: center;
 }
 
-/* Caja con scroll para los inputs */
-.input-scroll {
-    flex-grow: 1;
-    overflow-y: auto;
-    padding-right: 10px;
-    box-sizing: border-box;
-    max-height: calc(100% - 80px); /* Ajusta la altura de los inputs */
+/* Contenedor central del contenido */
+.container-center {
+    width: 100%;
 }
 
-/* Estilo para los inputs */
+/* Estilo del título */
+.container-center h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Estilo para el formulario */
+.container-center form {
+    width: 100%;
+}
+
 .input-group {
     margin-bottom: 15px;
 }
-.input-group label {
+
+label {
     font-size: 16px;
     color: #666;
     margin-bottom: 8px;
     display: block;
 }
-.input-group input {
+
+/* Estilo para los inputs */
+input {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
 }
 
-/* Botón fijo en la parte inferior */
-.submit-btn {
+/* Estilo para el botón de registro */
+.register-btn {
     width: 100%;
     padding: 12px;
-    background-color: #1bcbd8;
+    background-color: #3e5b97;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-    position: relative;
-    bottom: 0;
+    margin-top: 20px;
 }
 
-.submit-btn:hover {
-    background-color: #0a17c7;
-}
-
-/* Botón de registro */
-.submit-btn {
-    width: 100%;
-    padding: 12px;
-    background-color: #1bcbd8;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    position: relative;
-    bottom: 0;
-}
-
-.submit-btn:hover {
-    background-color: #0a17c7;
+.register-btn:hover {
+    background-color: #6b89c1;
 }
 
 /* Enlace para volver a login */
 .back-to-login {
-    display: block;
+    display: inline-block;
     margin-top: 15px;
+    margin-bottom: 15px;
     font-size: 14px;
-    color: #1bcbd8;
-    text-align: center;
+    color: #180db9;
     text-decoration: none;
+    text-align: center;
 }
 
 .back-to-login:hover {
