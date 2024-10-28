@@ -1,3 +1,7 @@
+body{
+  width: 100vw;
+  height: 100vh;
+}
 /* Aplicar la fuente Mulish globalmente */
 * {
   font-family: 'Mulish', serif;

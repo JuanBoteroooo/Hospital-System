@@ -5,11 +5,14 @@
     align-items: center;
     background-color: white; /* Tono turquesa */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 68px;
+    width: 100%;
   }
   
   .navbar-logo{
     margin-left: 10px;
   }
+  
   /* Logo o nombre de la aplicación */
   .navbar-logo h1 {
     color: #3e5b97;
