@@ -32,24 +32,26 @@ class Cita {
     console.log('Parámetros recibidos en Ver:', params);
 
     if (!params || !params.appointmentId) {
-      throw new Error("ID de la cita no proporcionado.");
+        throw new Error("ID de la cita no proporcionado.");
     }
 
-    const {appointmentId} = params;
+    const { appointmentId } = params;
 
     try {
-      const result = await this.db.exe('verCita', [appointmentId]);
-      if (result && result.rows.length > 0) {
-        console.log('Cita encontrada:', result.rows[0]);
-        return { msg: "Cita encontrada.", cita: result.rows[0] };
-      } else {
-        return { msg: "No se encontró la cita." };
-      }
+        const result = await this.db.exe('verCita', [appointmentId]);
+        if (result && result.rows.length > 0) {
+            console.log('Cita encontrada:', result.rows[0]);
+            // Solo devolver el objeto cita sin el mensaje adicional
+            return result.rows[0];
+        } else {
+            console.log('No se encontró la cita con ID:', appointmentId);
+            return { msg: "No se encontró la cita con ese ID." };
+        }
     } catch (error) {
-      console.error('Error buscando la cita:', error);
-      return { msg: "Error buscando la cita." };
+        console.error('Error buscando la cita:', error);
+        return { msg: "Error buscando la cita." };
     }
-  }
+}
 
   // Modificar cita
   async Modificar(params) {

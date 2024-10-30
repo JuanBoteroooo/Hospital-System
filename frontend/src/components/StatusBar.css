@@ -1,0 +1,25 @@
+/* StatusBar.css */
+.status-bar {
+    border-radius: 4px;
+    width: 40%;
+    text-align: center;
+    font-size: 16px;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out; /* Transición de opacidad */
+    margin-top: 10px;
+}
+
+.status-bar.success {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.status-bar.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Cuando el StatusBar se oculta, cambiamos la opacidad a 0 */
+.status-bar.hidden {
+    opacity: 0;
+}

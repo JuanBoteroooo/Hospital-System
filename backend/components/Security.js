@@ -37,7 +37,7 @@ const Security = class {
   }
 
   // Ejecutar el método en el BO correspondiente
-  executeMethod(jsonData, res) {
+  async executeMethod(jsonData, res) {
     try {
       console.log(`Intentando cargar el BO: ${jsonData.objectName}.js, método: ${jsonData.methodName}`);
       
@@ -46,7 +46,7 @@ const Security = class {
       
       if (typeof boInstance[jsonData.methodName] === 'function') {
         // Ejecutar el método y devolver la respuesta
-        const result = boInstance[jsonData.methodName](jsonData.params);
+        const result = await boInstance[jsonData.methodName](jsonData.params);
         
         // Enviar respuesta exitosa
         res.status(200).send({ msg: 'Método ejecutado con éxito', result });

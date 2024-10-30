@@ -1,30 +1,93 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Home.css";
 import NavBar from "../components/navbar";
-import Loading from "../components/loading"; // Importa el componente de carga
-import f1 from "../assets/images/agendar.jpg";
-import f2 from "../assets/images/hospitalizacion.jpg";
-import f3 from "../assets/images/tratamiento.jpg";
-import f4 from "../assets/images/historia.jpg";
-import f5 from "../assets/images/examen.jpg";
+import Loading from "../components/loading";
 
 const Home = () => {
-    const [loading, setLoading] = useState(true); // Controla el estado de carga
+    const [loading, setLoading] = useState(true);
+    const [sessionLoading, setSessionLoading] = useState(true);
+    const [showCrud, setShowCrud] = useState({
+        cita: false,
+        historia: false,
+        examenes: false,
+        tratamiento: false,
+        hospitalizacion: false,
+    });
+    const [timeoutId, setTimeoutId] = useState(null);
+
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Simula un tiempo de carga (por ejemplo, 2 segundos)
-        const simulateLoading = setTimeout(() => {
-            // Aquí podrías también verificar la sesión como lo hacías antes
-            setLoading(false); // Cambia a falso después del tiempo simulado
-        }, 3000); // 2 segundos de "carga ficticia"
+        const checkSession = async () => {
+            try {
+                const response = await axios.get("http://localhost:3000/sessionExist", { withCredentials: true });
+                if (!response.data.session) {
+                    navigate("/login");
+                } else {
+                    setSessionLoading(false);
+                }
+            } catch (error) {
+                console.error("Error verificando la sesión:", error);
+                navigate("/login");
+            }
+        };
 
-        return () => clearTimeout(simulateLoading); // Limpiar timeout si el componente se desmonta
-    }, []);
+        checkSession();
+    }, [navigate]);
 
-    if (loading) {
-        return <Loading />; // Muestra la página de carga si está cargando
+    useEffect(() => {
+        if (!sessionLoading) {
+            const simulateLoading = setTimeout(() => {
+                setLoading(false);
+            }, 2000);
+
+            return () => clearTimeout(simulateLoading);
+        }
+    }, [sessionLoading]);
+
+    const handleClick = (section) => {
+        setShowCrud((prev) => ({
+            ...prev,
+            [section]: true,
+        }));
+
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+        }
+
+        const id = setTimeout(() => {
+            setShowCrud((prev) => ({
+                ...prev,
+                [section]: false,
+            }));
+        }, 3500);
+
+        setTimeoutId(id);
+    };
+
+    const handleOption = (section, option) => {
+        switch (option) {
+            case "Agendar":
+                navigate(`/crear${section}`);
+                break;
+            case "Modifica":
+                navigate(`/modificar${section}`);
+                break;
+            case "Cancela":
+                navigate(`/eliminar${section}`);
+                break;
+            case "Consulta":
+                navigate(`/ver${section}`);
+                break;
+            default:
+                break;
+        }
+    };
+
+    if (sessionLoading || loading) {
+        return <Loading />;
     }
 
     return (
@@ -38,25 +101,99 @@ const Home = () => {
             <div className="img-carousel">
                 <div className="linewhite"></div>
                 <section>
-                    <div>
-                        <img src={f1} alt="Agendar" />
-                        <label>Citas</label>
+                    {/* Sección Cita */}
+                    <div className="cita" onClick={() => handleClick("cita")}>
+                        <div className="labelwrapper">
+                            {!showCrud.cita && (
+                                <div className="labelP">
+                                    <label>Cita</label>
+                                </div>
+                            )}
+                            {showCrud.cita && (
+                                <div className="labelL">
+                                    <label onClick={() => handleOption("Cita", "Agendar")}>Agendar</label>
+                                    <label onClick={() => handleOption("Cita", "Modifica")}>Modificar</label>
+                                    <label onClick={() => handleOption("Cita", "Cancela")}>Cancelar</label>
+                                    <label onClick={() => handleOption("Cita", "Consulta")}>Consultar</label>
+                                </div>
+                            )}
+                        </div>
                     </div>
-                    <div>
-                        <img src={f4} alt="Historia clínica" />
-                        <label>Historia clínica</label>
+
+                    {/* Sección Historia Clínica */}
+                    <div className="historia" onClick={() => handleClick("historia")}>
+                        <div className="labelwrapper">
+                            {!showCrud.historia && (
+                                <div className="labelP">
+                                    <label>Historia Clínica</label>
+                                </div>
+                            )}
+                            {showCrud.historia && (
+                                <div className="labelL">
+                                    <label onClick={() => handleOption("historia", "Agendar")}>Agendar</label>
+                                    <label onClick={() => handleOption("historia", "Modifica")}>Modificar</label>
+                                    <label onClick={() => handleOption("historia", "Cancela")}>Cancelar</label>
+                                    <label onClick={() => handleOption("historia", "Consulta")}>Consultar</label>
+                                </div>
+                            )}
+                        </div>
                     </div>
-                    <div>
-                        <img src={f5} alt="Exámenes" />
-                        <label>Exámenes</label>
+
+                    {/* Sección Exámenes */}
+                    <div className="examenes" onClick={() => handleClick("examenes")}>
+                        <div className="labelwrapper">
+                            {!showCrud.examenes && (
+                                <div className="labelP">
+                                    <label>Exámenes</label>
+                                </div>
+                            )}
+                            {showCrud.examenes && (
+                                <div className="labelL">
+                                    <label onClick={() => handleOption("examenes", "Agendar")}>Agendar</label>
+                                    <label onClick={() => handleOption("examenes", "Modifica")}>Modificar</label>
+                                    <label onClick={() => handleOption("examenes", "Cancela")}>Cancelar</label>
+                                    <label onClick={() => handleOption("examenes", "Consulta")}>Consultar</label>
+                                </div>
+                            )}
+                        </div>
                     </div>
-                    <div>
-                        <img src={f3} alt="Tratamiento" />
-                        <label>Tratamiento</label>
+
+                    {/* Sección Tratamiento */}
+                    <div className="tratamiento" onClick={() => handleClick("tratamiento")}>
+                        <div className="labelwrapper">
+                            {!showCrud.tratamiento && (
+                                <div className="labelP">
+                                    <label>Tratamiento</label>
+                                </div>
+                            )}
+                            {showCrud.tratamiento && (
+                                <div className="labelL">
+                                    <label onClick={() => handleOption("tratamiento", "Agendar")}>Agendar</label>
+                                    <label onClick={() => handleOption("tratamiento", "Modifica")}>Modificar</label>
+                                    <label onClick={() => handleOption("tratamiento", "Cancela")}>Cancelar</label>
+                                    <label onClick={() => handleOption("tratamiento", "Consulta")}>Consultar</label>
+                                </div>
+                            )}
+                        </div>
                     </div>
-                    <div>
-                        <img src={f2} alt="Hospitalización" />
-                        <label>Hospitalización</label>
+
+                    {/* Sección Hospitalización */}
+                    <div className="hospitalizacion" onClick={() => handleClick("hospitalizacion")}>
+                        <div className="labelwrapper">
+                            {!showCrud.hospitalizacion && (
+                                <div className="labelP">
+                                    <label>Hospitalización</label>
+                                </div>
+                            )}
+                            {showCrud.hospitalizacion && (
+                                <div className="labelL">
+                                    <label onClick={() => handleOption("hospitalizacion", "Agendar")}>Agendar</label>
+                                    <label onClick={() => handleOption("hospitalizacion", "Modifica")}>Modificar</label>
+                                    <label onClick={() => handleOption("hospitalizacion", "Cancela")}>Cancelar</label>
+                                    <label onClick={() => handleOption("hospitalizacion", "Consulta")}>Consultar</label>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </section>
             </div>

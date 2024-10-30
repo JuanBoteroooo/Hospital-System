@@ -27,13 +27,13 @@ const NavBar = () => {
                     <Link to="/">Inicio</Link>
                 </li>
                 <li>
-                    <Link to="/about">Acerca de</Link>
+                    <Link to="/">Acerca de</Link>
                 </li>
                 <li>
-                    <Link to="/services">Servicios</Link>
+                    <Link to="/">Servicios</Link>
                 </li>
                 <li>
-                    <Link to="/contact">Contacto</Link>
+                    <Link to="/">Contacto</Link>
                 </li>
                 <li>
                     {/* Botón de logout */}

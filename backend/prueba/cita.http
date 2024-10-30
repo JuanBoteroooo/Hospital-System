@@ -17,13 +17,13 @@ Cookie: connect.sid=s%3AKG-AbBlYxHtbXYAZmmI4WyBxlXT_4uAh.fPCL8vVUMIT19tlUPaCli8V
 ### ver cita
 POST http://localhost:3000/toProcess
 Content-Type: application/json
-Cookie: connect.sid=s%3AF1BXGFnEiPVQTfaTcLS1HFmQy0Yp1pLJ.RD%2BVDDp3VUUPqZGqMsT3eXDFl0nua4qf4Nyrxbkxugs
+Cookie: connect.sid=s%3A6JNxr08O-gI1nu4HHT8xFSKTvOLlm5IJ.cCI23KmPMLPBZ44pukjsn0gZiR97ggtYqZc8qZ7FTns
 
 {
     "objectName": "Cita",
     "methodName": "Ver", 
     "params": {
-        "appointmentId": 2
+        "appointmentId": 13
     }
 }
 

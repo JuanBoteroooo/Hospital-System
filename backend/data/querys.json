@@ -13,7 +13,7 @@
 
     "crearCita": "INSERT INTO appointment (appointment_dt, appointment_hr, person_id, employer_id, department_id) VALUES ($1, $2, $3, $4, 4) RETURNING *",
 
-    "verCita": "SELECT * FROM appointment WHERE appointment_id = $1",
+    "verCita": "SELECT a.appointment_id, a.appointment_dt AS appointmentDate, a.appointment_hr AS appointmentTime, p.person_na AS patientName, p.person_lna AS patientLastName, d.person_na AS doctorName, d.person_lna AS doctorLastName FROM appointment a JOIN person p ON a.person_id = p.person_id JOIN employer e ON a.employer_id = e.employer_id JOIN person d ON e.person_id = d.person_id WHERE a.appointment_id = $1",
 
     "modificarCita": "UPDATE appointment SET appointment_dt = $2, appointment_hr = $3, person_id = $4, employer_id = $5 WHERE appointment_id = $1;",
 
